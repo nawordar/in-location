@@ -4,7 +4,7 @@ if ($env:APPVEYOR_REPO_BRANCH -and $env:APPVEYOR_REPO_BRANCH -notlike "master") 
 }
 
 $PSVersion = $PSVersionTable.PSVersion.Major
-Import-Module ..\InLocation.psm1 -Force
+Import-Module $PSScriptRoot\..\InLocation.psm1 -Force
 
 Describe "InLocation PS$PSVersion" {
 
