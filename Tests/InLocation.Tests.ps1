@@ -14,24 +14,23 @@ Describe "InLocation PS$PSVersion" {
 
         It "should change to the inner directory and return the value of the callback" {
 
-            $wd = "SampleWorkingDirectory"
+            $sampleDirectory = "SampleDirectory"
+            $sampleDirectoryLocation = Join-Path $PSScriptRoot $sampleDirectory
 
             # Create test directory if it does not exist
-            if (-Not (Test-Path $wd)) {
-                New-Item -Path $wd -ItemType Directory
+            if (-Not (Test-Path $sampleDirectoryLocation)) {
+                New-Item -Path $sampleDirectoryLocation -ItemType Directory
             }
             
             function CallbackFunction {
                 (Get-Item -Path ".\").FullName
             }
 
-            $result = InLocation($wd) {
+            $result = InLocation($sampleDirectoryLocation) {
                 CallbackFunction
             }
 
-            $expected = Join-Path $PSScriptRoot $wd
-
-            $result | Should be $expected
+            $result | Should be $sampleDirectoryLocation
         }
 
     } 
