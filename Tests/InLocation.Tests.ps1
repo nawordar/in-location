@@ -13,8 +13,14 @@ Describe "InLocation PS$PSVersion" {
         Set-StrictMode -Version latest
 
         It "should change to the inner directory and return the value of the callback" {
+
             $wd = "SampleWorkingDirectory"
-            $result = ""
+
+            # Create test directory if it does not exist
+            if (-Not (Test-Path $wd)) {
+                New-Item -Path $wd -ItemType Directory
+            }
+            
             function CallbackFunction {
                 (Get-Item -Path ".\").FullName
             }
