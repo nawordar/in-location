@@ -18,7 +18,7 @@ function InLocation {
     Set-Location $Location
     $return = &$Callback
     Set-Location $originalLocation
-    
+
     $return
 }
 
